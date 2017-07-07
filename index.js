@@ -213,3 +213,24 @@ bot.on('messageDelete', (message) => {
 console.log('Bot started');
 
 bot.login(token);
+
+
+const http = require("http");
+const app_port = (process.env.app_port === undefined) ? 80 : app_port;
+
+var server = http.createServer(function(request, response) {
+  response.writeHead(200, {"Content-Type": "text/html"});
+  response.write("<!DOCTYPE html>");
+  response.write("<html>");
+  response.write("<head>");
+  response.write("<title>Hello World Page</title>");
+  response.write("</head>");
+  response.write("<body>");
+  response.write("Hello World!");
+  response.write("</body>");
+  response.write("</html>");
+  response.end();
+});
+
+server.listen(app_port);
+console.log('Http health check service started on port: ' + app_port);
